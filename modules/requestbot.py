@@ -13,6 +13,7 @@ from modules.storeusername import store
 class CreateAccount:
     def __init__(self, email, username, password, name, numberofaccounts, use_custom_proxy, use_local_ip_address, proxy=None):
         self.sockets = []
+        print(email)
         self.email = email
         self.username = username
         self.password = password
@@ -56,18 +57,18 @@ class CreateAccount:
         """
         if self.use_local_ip_address is True:
             session = requests.Session()
-            try: 
-                session_start = session.get(self.url);
-                session.headers.update({'referer' : self.referer_url,'x-csrftoken' : session_start.cookies['csrftoken']})
+            session_start = session.get(self.url);
+            session.headers.update({'referer' : self.referer_url,'x-csrftoken' : session_start.cookies['csrftoken']})
 
-                create_request = session.post(self.url, data=payload, allow_redirects=True)
-                session.headers.update({'x-csrftoken' : session_start.cookies['csrftoken']})
-                response_text = create_request.text
-                response = json.loads(create_request.text)
-                print(response)
-            except Exception as e:
-                print(e)
-                print("---Request Bot --- An error occured while creating account with local ip address")
+            create_request = session.post(self.url, data=payload, allow_redirects=True)
+            session.headers.update({'x-csrftoken' : session_start.cookies['csrftoken']})
+            response_text = create_request.text
+            print(response_text)
+            response = json.loads(create_request.text)
+            print(response)
+            # except Exception as e:
+            #     print(e)
+            #     print("---Request Bot --- An error occured while creating account with local ip address")
 
         elif self.use_custom_proxy is True:
             try: 
