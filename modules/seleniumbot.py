@@ -17,7 +17,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys  # and Krates
 import requests
 import re
-import logging
+from modules.email_manager import EmailManager
 # from fake_useragent import UserAgent
 
 # from pymailutils import Imap
@@ -60,7 +60,9 @@ class AccountCreator():
         action_chains = ActionChains(driver)
         sleep(5)
         account_info = accnt.new_account()
-
+        email_manager = EmailManager()
+        generated_email = email_manager.generated_email
+        print(generated_email)
         # fill the email value
         print('Filling email field')
         email_field = driver.find_element('name', 'emailOrPhone')
@@ -68,7 +70,7 @@ class AccountCreator():
         sleep(1)
         action_chains.move_to_element(email_field)
         print(account_info["email"])
-        email_field.send_keys(str(account_info["email"]))
+        email_field.send_keys(generated_email)
 
         sleep(2)
 
@@ -126,8 +128,10 @@ class AccountCreator():
             year_button.send_keys(account_info["birthday"].split(" ")[2])
 
             sleep(2)
-            next_button = driver.find_element("xpath", '//*[@id="react-root"]/section/main/div/div/div[1]/div/div[6]/button')
+            next_button = driver.find_element("xpath", '//*[@id="react-root"]/section/main/div/div/div[1]/div/div[6]')
             next_button.click()
+            print("Sleeping 100 secs")
+            sleep(100)
 
         except Exception as e :
             print(e)
@@ -146,7 +150,7 @@ class AccountCreator():
         # logging.info("The confirm url is {}".format(confirm_url))
         # driver.get(confirm_url)
 
-        driver.close()
+        #driver.close()
 
     def creation_config(self):
         try:
@@ -196,7 +200,6 @@ class AccountCreator():
 
         except Exception as e:
             print(e)
-
 
 def runbot():
     account = AccountCreator(config.Config['use_custom_proxy'], config.Config['use_local_ip_address'])

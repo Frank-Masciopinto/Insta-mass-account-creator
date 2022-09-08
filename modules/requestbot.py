@@ -21,7 +21,7 @@ class CreateAccount:
         self.numberofaccounts = numberofaccounts
         self.use_custom_proxy = use_custom_proxy
         self.use_local_ip_address = use_local_ip_address
-        self.url = "https://www.instagram.com/accounts/web_create_ajax/"
+        self.url = "https://www.instagram.com/accounts/emailsignup/"
         self.referer_url = "https://www.instagram.com/"
         self.proxy = proxy
        

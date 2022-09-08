@@ -28,3 +28,7 @@ Config = {
     "activation_email_serv": "xxxxxxxxxxxxxxxx",
     "activation_email_spor": 993,
 }
+
+EmailConfig = {
+    "API_Key": "k_pVZURv6MAgAvfj800DoXqidPQODEjEwZxr7fJeQd92b"
+}
